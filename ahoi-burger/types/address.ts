@@ -3,7 +3,6 @@ type Country = {
   name: string
 }
 
-
 export type Address = {
   street: string
   city: string

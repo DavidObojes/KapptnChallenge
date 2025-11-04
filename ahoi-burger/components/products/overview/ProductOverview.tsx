@@ -1,16 +1,14 @@
-import Greeting from "@/components/Greeting";
 import ProductListLarge from "@/components/products/list/ProductListLarge";
 import ProductListSmall from "@/components/products/list/ProductListSmall";
-import {Address} from "@/types/address";
+import {Products} from "@/types/products";
 
 interface ProductOverviewProps {
-  address: Address
-  name: string
+  products: Products
 }
 
-export default async function ProductOverview() {
+export default function ProductOverview({products}: ProductOverviewProps) {
   return (<>
-    <ProductListLarge/>
-    <ProductListSmall/>
+        <ProductListLarge products={products.burgers} headline="Burgers"/>
+        <ProductListSmall products={products.drinks} headline="Drinks"/>
   </>)
 }

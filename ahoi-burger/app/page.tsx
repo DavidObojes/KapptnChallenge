@@ -1,44 +1,48 @@
 import Image from "next/image";
 import ProductOverview from "@/components/products/overview/ProductOverview";
 import Greeting from "@/components/Greeting";
+import {Products} from "@/types/products";
+import {AhoiBurgerAPIResponse} from "@/types/api";
 
 export default async function Home() {
 
   //Greeting Data
-  let address;
-  let name;
+  let address: any;
+  let name: any;
 
-  //Food Data
-  let burgers
-
-  //Drinks Data
-  let drinks
-
+  //Product Data Type
+  let products: Products = {
+    burgers: [],
+    drinks: [],
+  };
 
   try {
     const data = await fetch("https://ahoi-production-bucket-public.s3.eu-central-1.amazonaws.com/challenge/assets/restaurant.json")
-    const res = await data.json()
-    //console.log("Response:", res)
+    const res: AhoiBurgerAPIResponse = await data.json()
 
+    //Assign Greeting Data
     name = res.name
     address = res.address
-    burgers = res.offered_burgers
-    drinks = res.offered_drinks
 
-    console.log("Burgers:", burgers)
-    console.log("Drinks:", drinks)
+    //Assign Product Data
+    products.burgers = res.offered_burgers
+    products.drinks = res.offered_drinks
 
   } catch (err) {
     console.log(err)
   }
 
   return (<>
-    <div className="flex min-h-screen items-center justify-center font-sans">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16  sm:items-start">
-        <Greeting address={address} name={name} />
-        <ProductOverview burgers={burgers} drinks={drinks}/>
-      </main>
-    </div>
-    </>
+        <div className="h-screen overflow-hidden flex flex-col font-sans">
+          {/* Obere Begrüßung */}
+          <header className="p-4 shadow-md">
+            <Greeting address={address} name={name}/>
+          </header>
+
+          <main className="flex flex-col p-4 gap-4 overflow-y-auto">
+            <ProductOverview products={products}/>
+          </main>
+        </div>
+      </>
   );
 }
