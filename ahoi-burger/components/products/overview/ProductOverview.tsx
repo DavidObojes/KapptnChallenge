@@ -1,14 +1,18 @@
+"use client"
+
 import ProductListLarge from "@/components/products/list/ProductListLarge";
 import ProductListSmall from "@/components/products/list/ProductListSmall";
-import {Products} from "@/types/products";
+import {useRestaurant} from "@/context/RestaurantContext";
 
-interface ProductOverviewProps {
-  products: Products
-}
+export default function ProductOverview() {
 
-export default function ProductOverview({products}: ProductOverviewProps) {
+  const {products} = useRestaurant();
+
   return (<>
-        <ProductListLarge products={products.burgers} headline="Burgers"/>
-        <ProductListSmall products={products.drinks} headline="Drinks"/>
+    <ProductListLarge products={products.burgers} headline="Burgers"/>
+
+    <div className="flex flex-col w-full gap-4">
+      <ProductListSmall products={products.drinks} headline="Drinks"/>
+    </div>
   </>)
 }

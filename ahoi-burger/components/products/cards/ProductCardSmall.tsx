@@ -1,27 +1,39 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface ProductCardProperties {
   name?: string,
-  price?: number,
-  weight_grams?: number,
-  img?: string;            // top-level image
-  info?: { img?: string }; // nested image
+  img?: string;
 }
 
-export default function ProductCardSmall<T>({product} : {product : ProductCardProperties}) {
+export default function ProductCardSmall<T>({product}: { product: ProductCardProperties }) {
 
-  const imgSrc = product.info?.img ?? product.img ?? "/placeholder.png";
-  const altText = product.name ?? "product image";
+  //Fallbacks if any information is missing
+  const imgSrc = product.img ?? "/placeholder.png";
+  const altText = product.name ?? "Product Image";
+  const name = product.name ?? "Product"
 
-  return(<>
+  //Slug for Calling the Detail Page
+  const slug = name.toLowerCase().replace(/\s+/g, "-");
 
-    {product.name}
-
-      <Image
-        src={imgSrc}
-        alt={altText}
-        width={400}
-        height={400}
-      />
+  return (<>
+    <Link href={`/product/${slug}`}>
+      <div className="flex flex-col">
+        <div className="h-25 sm:h-40 relative rounded-2xl overflow-hidden min-w-[120px] min-h-[120px]">
+          <Image
+              src={imgSrc}
+              alt={altText}
+              width={400}
+              height={400}
+              className={`h-full w-full object-cover`}
+          />
+        </div>
+        <div className="flex py-2 justify-between">
+        <span className={`text-xs sm:text-sm font-semibold`}>
+          {name}
+        </span>
+        </div>
+      </div>
+    </Link>
   </>)
 }

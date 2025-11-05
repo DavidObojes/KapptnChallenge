@@ -1,33 +1,40 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.scss";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import {AhoiBurgerAPIResponse} from "@/types/api";
+import {RestaurantProvider} from "@/context/RestaurantContext";
 
 export const metadata: Metadata = {
   title: "Ahoi Burger",
   description: "Tasty Burger for everyone",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  // Fetch Data
+  const data = await fetch(
+    "https://ahoi-production-bucket-public.s3.eu-central-1.amazonaws.com/challenge/assets/restaurant.json"
+  );
+  const res: AhoiBurgerAPIResponse = await data.json();
+
+  // Prepare the data for the provider
+  const restaurantData = {
+    name: res.name,
+    address: res.address,
+    products: {
+      burgers: res.offered_burgers,
+      drinks: res.offered_drinks,
+    },
+  };
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body>
+        <RestaurantProvider data={restaurantData}>
+          {children}
+        </RestaurantProvider>
       </body>
     </html>
   );

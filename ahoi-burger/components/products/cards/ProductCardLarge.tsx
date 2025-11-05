@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface ProductCardProperties {
   name?: string,
@@ -21,7 +22,11 @@ export default function ProductCardLarge<T>({product}: { product: ProductCardPro
   const price = product.price ?? product.price_usd ?? "On Request"
   const inStock = product.info?.in_stock ?? false;
 
+   //Slug for Calling the Detail Page
+  const slug = name.toLowerCase().replace(/\s+/g, "-");
+
   return (<>
+  <Link href={`/product/${slug}`}>
     <div className="rounded-2xl shadow-md flex flex-col overflow-hidden">
 
       <div className="h-25 sm:h-40 relative">
@@ -55,5 +60,6 @@ export default function ProductCardLarge<T>({product}: { product: ProductCardPro
         </span>
       </div>
     </div>
+  </Link>
   </>)
 }
