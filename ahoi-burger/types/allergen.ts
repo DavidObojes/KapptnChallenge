@@ -1,0 +1,1 @@
+export type Allergen = "rr" | "xx" | "mm" | "bb" | "zz" | "ll" | "vv" | "oo";

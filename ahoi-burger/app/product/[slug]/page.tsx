@@ -12,7 +12,7 @@ export default async function ProductDetailPage({params} : PageProps) {
 
   return (<>
         <div className="h-screen overflow-hidden flex flex-col font-sans">
-          <main className="flex flex-col p-4 gap-4 overflow-y-auto overflow-x-hidden">
+          <main className="flex flex-col gap-4 overflow-y-auto overflow-x-hidden">
             <ProductDetail slug={slug}/>
           </main>
         </div>

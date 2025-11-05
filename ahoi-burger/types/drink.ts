@@ -1,9 +1,9 @@
-type Allergens = "rr" | "oo"
+import {Allergen} from "@/types/allergen";
 
 export type Drink = {
   name: string
   description: string
   price: number
-  allergens?: Allergens
+  allergens?: Allergen[]
   img: string
 }
