@@ -13,10 +13,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   // Fetch Data
   const data = await fetch(
     "https://ahoi-production-bucket-public.s3.eu-central-1.amazonaws.com/challenge/assets/restaurant.json"
   );
+
+  //Type Safety for the Data Structure
   const res: AhoiBurgerAPIResponse = await data.json();
 
   // Prepare the data for the provider

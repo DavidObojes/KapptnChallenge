@@ -15,7 +15,7 @@ interface ProductCardProperties {
 
 export default function ProductCardLarge<T>({product}: { product: ProductCardProperties }) {
 
-  //Fallbacks if any information is missing
+  //Fallbacks and nullish checks for different product Types
   const imgSrc = product.info?.img ?? product.img ?? "/placeholder.png";
   const altText = product.name ?? "Product Image";
   const name = product.name ?? "Product"
