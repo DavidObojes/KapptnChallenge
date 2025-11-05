@@ -3,6 +3,7 @@
 import Image from "next/image";
 import {BurgerTag} from "@/types/burger";
 import {Allergen} from "@/types/allergen";
+import ProductDetailLabel from "@/components/products/detail/ProductDetailLabel";
 
 interface ProductDetailProperties {
   name?: string
@@ -42,14 +43,14 @@ export default function ProductDetailContent({product}: { product: ProductDetail
       <div className="flex justify-between text-center pb-4 border-b border-gray-300">
         <div className="text-xl font-bold">
           {price} USD
-          <span className="product-detail-label">Price</span>
+          <ProductDetailLabel>Price</ProductDetailLabel>
         </div>
 
         {/* Weight */}
         {product.weight_grams &&
             <div className="text-xl font-bold">
               {product.weight_grams + " g"}
-              <span className="product-detail-label">Weight</span>
+              <ProductDetailLabel>Weight</ProductDetailLabel>
             </div>
         }
 
@@ -57,7 +58,7 @@ export default function ProductDetailContent({product}: { product: ProductDetail
         {product.info?.vegetarian != null ?
             <div className="text-xl font-bold">
               {product.info?.vegetarian === true ? "Yes" : "No"}
-              <span className="product-detail-label">Vegetarian</span>
+              <ProductDetailLabel>Vegetarian</ProductDetailLabel>
             </div>
             : ""
         }
@@ -71,7 +72,7 @@ export default function ProductDetailContent({product}: { product: ProductDetail
       {/* Tags */}
       {product.tags?.length ? (
           <div className="text-lg">
-            <span className="product-detail-label">Special Ingredients</span>{" "}
+            <ProductDetailLabel>Special Ingredients</ProductDetailLabel>
             {product.tags.join(", ")}
           </div>
       ) : null}
@@ -79,8 +80,8 @@ export default function ProductDetailContent({product}: { product: ProductDetail
       {/* Allergens */}
       {allergens?.length ? (
           <div className="text-lg">
-            <span className="product-detail-label mb-2">Allergens</span>
-            <div className="bg-[#feeed7] px-4 py-2 rounded-xl">
+            <ProductDetailLabel>Allergens</ProductDetailLabel>
+            <div className="bg-[#feeed7] px-4 py-2 rounded-xl mt-2">
               {allergens.join(", ")}
             </div>
           </div>

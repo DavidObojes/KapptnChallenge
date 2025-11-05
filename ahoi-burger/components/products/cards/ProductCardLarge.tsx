@@ -44,7 +44,7 @@ export default function ProductCardLarge<T>({product}: { product: ProductCardPro
           />
           {!inStock ?
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                text-black px-3 py-1 bg-white rounded-full font-medium text-center min-w-[200px]">
+                text-black text-sm px-3 py-1 bg-white rounded-full font-medium text-center min-w-[200px]">
                 Currently Not Available
               </div>
               :
