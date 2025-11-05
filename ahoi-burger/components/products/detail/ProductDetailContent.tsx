@@ -24,7 +24,7 @@ interface ProductDetailProperties {
 export default function ProductDetailContent({product}: { product: ProductDetailProperties }) {
 
   //Fallbacks if any information is missing
-  const imgSrc = product.info?.img ?? product.img ?? "/placeholder.png";
+  const imgSrc = product.info?.img ?? product.img ?? "/placeholder.jpeg";
   const altText = product.name ?? "Product Image";
   const price = product.price ?? product.price_usd ?? "On Request"
   const allergens = product.allergens ?? product.info?.allergens_contained_in

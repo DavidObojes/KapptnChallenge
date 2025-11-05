@@ -16,7 +16,7 @@ interface ProductCardProperties {
 export default function ProductCardLarge<T>({product}: { product: ProductCardProperties }) {
 
   //Fallbacks and nullish checks for different product Types
-  const imgSrc = product.info?.img ?? product.img ?? "/placeholder.png";
+  const imgSrc = product.info?.img ?? product.img ?? "/placeholder.jpeg";
   const altText = product.name ?? "Product Image";
   const name = product.name ?? "Product"
   const price = product.price ?? product.price_usd ?? "On Request"

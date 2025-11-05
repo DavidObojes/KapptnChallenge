@@ -9,7 +9,7 @@ interface ProductCardProperties {
 export default function ProductCardSmall<T>({product}: { product: ProductCardProperties }) {
 
   //Fallbacks if any Information is missing
-  const imgSrc = product.img ?? "/placeholder.png";
+  const imgSrc = product.img ?? "/placeholder.jpeg";
   const altText = product.name ?? "Product Image";
   const name = product.name ?? "Product"
 
